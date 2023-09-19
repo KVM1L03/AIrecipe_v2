@@ -1,20 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import Navigation from "./Navigation";
+import { useFonts } from "expo-font";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+const App = () => {
+  const [fontsLoaded] = useFonts({
+    "PlayfairDisplay-Bold": require("./assets/fonts/playfair/PlayfairDisplay-Bold.ttf"),
+    "PlayfairDisplay-Regular": require("./assets/fonts/playfair/PlayfairDisplay-Regular.ttf")
+  });
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  if (!fontsLoaded) {
+    // Wait for fonts to load
+    return null; // or render a loading screen
+  }
+
+  return <Navigation />;
+};
+
+export default App;
